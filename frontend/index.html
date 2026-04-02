@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic RAG — Pokemon Card Search</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ── Header ──────────────────────────────────────────────────────────────── -->
+<header class="header">
+  <div>
+    <h1>⚡ Agentic RAG Demo</h1>
+    <div class="subtitle">Pokemon Card Search · LangGraph + Claude + Elasticsearch</div>
+  </div>
+  <div id="pattern-badge" class="pattern-badge"></div>
+</header>
+
+<!-- ── Search bar ───────────────────────────────────────────────────────────── -->
+<div class="search-section">
+  <div class="search-row">
+    <input
+      id="search-input"
+      class="search-input"
+      type="text"
+      placeholder="Search Pokemon cards… e.g. 'fire type with high HP'"
+      autofocus
+    >
+    <button id="search-btn" class="search-btn">Search</button>
+  </div>
+  <div class="example-queries">
+    <span class="example-label">Try:</span>
+    <button class="example-btn" data-query="Charizard">
+      Direct — Charizard
+    </button>
+    <button class="example-btn loop" data-query="Find a water-type Pokemon that can heal itself">
+      ↺ Self-Correcting Loop
+    </button>
+    <button class="example-btn expand" data-query="Electric Pokemon that can paralyze or confuse the opponent">
+      ⇥ Query Expansion
+    </button>
+  </div>
+</div>
+
+<!-- ── Main layout ──────────────────────────────────────────────────────────── -->
+<div class="main">
+
+  <!-- ── Trace panel ──────────────────────────────────────────────────────── -->
+  <aside class="trace-panel">
+    <div class="trace-header">
+      <div id="trace-dot" class="dot"></div>
+      Agent Execution Trace
+    </div>
+
+    <div id="trace-steps" class="trace-steps">
+      <div class="empty-state">
+        <div class="icon">🤖</div>
+        <div>Run a search to see the agent's reasoning here.</div>
+        <div style="margin-top:8px;font-size:12px">
+          Each step shows which node fired, what it decided, and why.
+        </div>
+      </div>
+    </div>
+
+    <!-- Raw log toggle -->
+    <div id="raw-log-toggle" class="raw-log-toggle">
+      <span>▸</span>
+      <span id="raw-log-toggle-text">Show raw log</span>
+    </div>
+    <div id="raw-log" class="raw-log"></div>
+  </aside>
+
+  <!-- ── Results panel ────────────────────────────────────────────────────── -->
+  <main class="results-panel">
+
+    <div class="answer-section">
+      <div class="answer-label">Answer</div>
+      <div id="answer-text" class="answer-text answer-placeholder">
+        Results will appear here after your search.
+      </div>
+    </div>
+
+    <div class="cards-section">
+      <div class="cards-label">Matched Cards</div>
+      <div id="cards-grid" class="cards-grid">
+        <!-- cards rendered by JS -->
+      </div>
+    </div>
+
+    <div id="stats-bar" class="stats-bar" style="display:none"></div>
+  </main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
