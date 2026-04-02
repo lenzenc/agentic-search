@@ -199,9 +199,8 @@ async def test_full_graph_simple_path_trajectory_accumulates(monkeypatch):
         patch("app.agent.nodes.generate.get_client", return_value=mock_anthropic),
         patch("app.agent.nodes.retrieve.search_for_query", AsyncMock(return_value=[mock_card])),
     ):
-        from app.agent.graph import build_graph
-        graph = build_graph()
-        initial = {
+        from app.agent.graph import run_agent
+        state = {
             "original_query": "charizard",
             "is_complex": False,
             "sub_queries": [],
@@ -214,7 +213,9 @@ async def test_full_graph_simple_path_trajectory_accumulates(monkeypatch):
             "final_cards": [],
             "trajectory": [],
         }
-        result = await graph.ainvoke(initial)
+        async for state in run_agent(state):
+            pass
+        result = state
 
     node_names = [s["node"] for s in result["trajectory"]]
     assert "analyze_query" in node_names

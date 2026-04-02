@@ -5,8 +5,6 @@ requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.111",
     "uvicorn[standard]>=0.29",
-    "langgraph>=0.2",
-    "langchain-core>=0.2",
     "anthropic>=0.28",
     "openai>=1.30",
     "elasticsearch[async]>=8.13,<9",

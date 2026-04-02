@@ -1,5 +1,4 @@
-from typing import Annotated, TypedDict, Literal
-import operator
+from typing import TypedDict, Literal
 
 
 class SubQuery(TypedDict):
@@ -43,4 +42,4 @@ class AgentState(TypedDict):
     final_cards: list[dict]
 
     # Append-only trajectory — drives SSE stream
-    trajectory: Annotated[list[TrajectoryStep], operator.add]
+    trajectory: list[TrajectoryStep]

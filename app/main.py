@@ -11,8 +11,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
-from app.agent.graph import get_graph
-from app.agent.state import AgentState
+from app.agent.graph import run_agent
 from app.models.api import SearchRequest, SearchResponse, TrajectoryStep
 from app.models.card import CardResult
 from app.search.elasticsearch_client import get_es_client, close_clients
@@ -45,32 +44,30 @@ def detect_pattern(trajectory: list[dict]) -> str:
 
 
 async def search_stream(query: str):
-    """Generator that streams SSE events from LangGraph graph execution.
+    """Generator that streams SSE events from agent execution.
 
-    Uses stream_mode="values" which yields the full accumulated state after each
-    node completes. We track the trajectory length to emit only new steps.
+    run_agent() yields the full accumulated state after each node completes.
+    We track the trajectory length to emit only new steps as SSE events.
     """
-    graph = get_graph()
-
-    initial_state = AgentState(
-        original_query=query,
-        is_complex=False,
-        sub_queries=[],
-        active_query=query,
-        retrieved_docs=[],
-        iteration_count=0,
-        graded_docs=[],
-        relevant_docs=[],
-        final_answer="",
-        final_cards=[],
-        trajectory=[],
-    )
+    state: dict = {
+        "original_query": query,
+        "is_complex": False,
+        "sub_queries": [],
+        "active_query": query,
+        "retrieved_docs": [],
+        "iteration_count": 0,
+        "graded_docs": [],
+        "relevant_docs": [],
+        "final_answer": "",
+        "final_cards": [],
+        "trajectory": [],
+    }
 
     prev_trajectory_len = 0
-    final_state: AgentState | None = None
+    final_state: dict | None = None
 
     try:
-        async for state in graph.astream(initial_state, stream_mode="values"):
+        async for state in run_agent(state):
             final_state = state
             new_steps = state["trajectory"][prev_trajectory_len:]
             prev_trajectory_len = len(state["trajectory"])
