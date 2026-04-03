@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-04-03T16:55:17.994378+00:00",
+  "total": 1,
+  "passed": 1,
+  "failed": 0,
+  "correctness_pct": 100.0,
+  "cases": [
+    {
+      "case_id": "Q-002",
+      "query": "Umbreon VMAX",
+      "category": "name_mechanic_lookup",
+      "difficulty": "easy",
+      "score": 0.7,
+      "passed": true,
+      "reasoning": "The search correctly identified Umbreon VMAX cards from Evolving Skies and returned 3 cards matching the expected set, with no forbidden cards included. However, the rarities returned (two 'Rare Rainbow' and one 'Rare Holo VMAX') don't perfectly align with the expected rarities (Rare Holo VMAX, Secret Rare x2), and the answer text contains accurate ability/attack information though slightly imprecise on attack cost details. The core intent was fulfilled but variant identification is slightly off.",
+      "failure_category": null,
+      "actual_cards_count": 3,
+      "actual_answer_snippet": "## Umbreon VMAX \u2014 Evolving Skies\n\n**Umbreon VMAX** is a Darkness-type VMAX Pok\u00e9mon from the *Evolving Skies* set with **310 HP**.\n\n### Key Attributes:\n- **Ability \u2014 Dark Signal:** When you evolve into",
+      "api_error": null,
+      "latency_ms": 9913
+    }
+  ],
+  "summary_by_category": {
+    "name_mechanic_lookup": {
+      "total": 1,
+      "passed": 1,
+      "pct": 100.0
+    }
+  }
+}
