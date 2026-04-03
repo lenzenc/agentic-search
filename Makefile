@@ -1,4 +1,4 @@
-.PHONY: dev ingest ingest-fetch ingest-embed ingest-index test test-integration docker-up docker-down
+.PHONY: dev ingest ingest-fetch ingest-embed ingest-index test test-integration docker-up docker-down eval improve
 
 dev:
 	uv run uvicorn app.main:app --reload --port 8000
@@ -28,3 +28,11 @@ test:
 
 test-integration:
 	uv run pytest tests/ -v -m integration
+
+eval:
+	@echo "Running evaluation against localhost:8000 (server must be running)..."
+	uv run python -m eval.run_eval
+
+improve:
+	@echo "Running prompt improvement loop (server must be running with 'make dev')..."
+	uv run python -m eval.improve
