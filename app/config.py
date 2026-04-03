@@ -21,7 +21,8 @@ class Settings(BaseSettings):
     # Agent behaviour
     max_retrieve_iterations: int = 3
     min_relevant_docs: int = 3
-    top_k_retrieve: int = 10
+    top_k_retrieve: int = 100
+    score_threshold_ratio: float = 0.4
 
 
 settings = Settings()

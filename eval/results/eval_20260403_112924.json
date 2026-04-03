@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-04-03T16:29:24.003158+00:00",
+  "total": 1,
+  "passed": 0,
+  "failed": 1,
+  "correctness_pct": 0.0,
+  "cases": [
+    {
+      "case_id": "Q-001",
+      "query": "Charizard",
+      "category": "name_lookup",
+      "difficulty": "easy",
+      "score": 0.0,
+      "passed": false,
+      "reasoning": "API call failed: API error: {'error': \"BadRequestError(400, 'illegal_argument_exception', '[num_candidates] cannot be",
+      "failure_category": "api_error",
+      "actual_cards_count": 0,
+      "actual_answer_snippet": "",
+      "api_error": "API error: {'error': \"BadRequestError(400, 'illegal_argument_exception', '[num_candidates] cannot be",
+      "latency_ms": 1310
+    }
+  ],
+  "summary_by_category": {
+    "name_lookup": {
+      "total": 1,
+      "passed": 0,
+      "pct": 0.0
+    }
+  }
+}

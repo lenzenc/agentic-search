@@ -29,6 +29,9 @@ IMPORTANT — recognize these specific query patterns and treat them as SIMPLE:
 2. **Card number queries**: e.g., "154/172" or "Charizard 154/172" → single search by number/name+number
 3. **Artist + Pokemon queries**: e.g., "Mitsuhiro Arita Charizard" → single search combining artist and card name
 4. **Slang/nickname queries**: e.g., "Moonbreon" (= Umbreon VMAX Evolving Skies), "Shadowless Charizard", "Gold Star" cards → translate the nickname into the real card name/set and use a single targeted search
+5. **Single Pokémon name queries** (just a Pokémon species name, no set/mechanic/number/type qualifier):
+   e.g., "Charizard", "Pikachu", "Mewtwo" → treat as SIMPLE with sub_queries=[the bare name].
+   A direct name search retrieves all cards for that Pokémon across all eras — do NOT decompose into era sub-queries.
 
 For slang/nicknames, expand the query to its known meaning:
 - "Moonbreon" → "Umbreon VMAX Evolving Skies"
@@ -37,13 +40,14 @@ For slang/nicknames, expand the query to its known meaning:
 
 Examples of SIMPLE queries:
 - "fire type pokemon" — single type filter
-- "Charizard" — specific card name
 - "Charizard Brilliant Stars" — name + set
 - "154/172" — card number lookup
 - "Charizard 154/172" — name + number lookup
 - "Mitsuhiro Arita Charizard" — artist + name
 - "Moonbreon" — slang for Umbreon VMAX Evolving Skies
 - "psychic pokemon with high HP" — one type + one attribute
+- "Charizard" — single Pokémon name, direct name lookup
+- "Pikachu" — single Pokémon name, direct name lookup
 
 Examples of COMPLEX queries:
 - "electric pokemon that can paralyze or confuse" — type + multiple distinct status effects

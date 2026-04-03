@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-04-03T16:02:17.153324+00:00",
+  "total": 1,
+  "passed": 0,
+  "failed": 1,
+  "correctness_pct": 0.0,
+  "cases": [
+    {
+      "case_id": "Q-001",
+      "query": "Charizard",
+      "category": "name_lookup",
+      "difficulty": "easy",
+      "score": 0.3,
+      "passed": false,
+      "reasoning": "The search returned only 8 Charizard cards when the expected result is 100+ cards spanning all sets/eras. While the cards returned are legitimately Charizard cards (no wrong Pokemon), the result is severely incomplete - missing the vast majority of Charizard cards including modern hits like Base Set Charizard, Charizard VMAX, Charizard ex, and many others. The answer text also only describes a handful of cards rather than providing a comprehensive browse experience.",
+      "failure_category": "missing_key_variant",
+      "actual_cards_count": 8,
+      "actual_answer_snippet": "# Charizard Cards Overview \ud83d\udd25\n\nHere's a breakdown of the Charizard cards found:\n\n---\n\n### **Stage 2 Charizards**\n- **Arceus (HP 140)** \u2014 Standout card with the **Fire Formation** Pok\u00e9-Body, boosting ea",
+      "api_error": null,
+      "latency_ms": 20137
+    }
+  ],
+  "summary_by_category": {
+    "name_lookup": {
+      "total": 1,
+      "passed": 0,
+      "pct": 0.0
+    }
+  }
+}

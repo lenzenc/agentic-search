@@ -1,5 +1,7 @@
 .PHONY: dev ingest ingest-fetch ingest-embed ingest-index test test-integration docker-up docker-down eval improve
 
+CASE_FILTER := $(filter q%,$(MAKECMDGOALS))
+
 dev:
 	uv run uvicorn app.main:app --reload --port 8000
 
@@ -31,7 +33,10 @@ test-integration:
 
 eval:
 	@echo "Running evaluation against localhost:8000 (server must be running)..."
-	uv run python -m eval.run_eval
+	uv run python -m eval.run_eval $(if $(CASE_FILTER),--case $(CASE_FILTER),)
+
+q%: ;
+
 
 improve:
 	@echo "Running prompt improvement loop (server must be running with 'make dev')..."

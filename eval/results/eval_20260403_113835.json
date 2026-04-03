@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-04-03T16:38:35.224886+00:00",
+  "total": 1,
+  "passed": 1,
+  "failed": 0,
+  "correctness_pct": 100.0,
+  "cases": [
+    {
+      "case_id": "Q-001",
+      "query": "Charizard",
+      "category": "name_lookup",
+      "difficulty": "easy",
+      "score": 0.85,
+      "passed": true,
+      "reasoning": "The search correctly returns Charizard cards spanning multiple sets and eras with 99 results, and does not include Charmander or Charmeleon. The result is slightly below perfect because the expected result mentions 100+ cards but only 99 were returned, and some very notable Charizard cards (like base set Charizard, Charizard ex, Charizard VSTAR) aren't visible in the top results shown, though they may be in the remaining 79.",
+      "failure_category": null,
+      "actual_cards_count": 99,
+      "actual_answer_snippet": "# Charizard Cards\n\nHere's a rundown of the notable Charizard Stage 2 Fire-type cards found:\n\n| Set | HP | Key Ability | Key Attack |\n|---|---|---|---|\n| **Dragon Majesty** | 160 | **Resolute Flame** \u2013",
+      "api_error": null,
+      "latency_ms": 12412
+    }
+  ],
+  "summary_by_category": {
+    "name_lookup": {
+      "total": 1,
+      "passed": 1,
+      "pct": 100.0
+    }
+  }
+}

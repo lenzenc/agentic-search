@@ -249,6 +249,7 @@ async def run_eval(
     output_dir: str = DEFAULT_OUT,
     concurrency: int = DEFAULT_CONCURRENCY,
     timeout_per_case: float = DEFAULT_TIMEOUT,
+    case_filter: str | None = None,
 ) -> EvalRun:
     # Load dataset
     dataset_file = Path(dataset_path)
@@ -258,6 +259,13 @@ async def run_eval(
 
     with open(dataset_file) as f:
         dataset: list[dict] = json.load(f)
+
+    if case_filter:
+        normalized = case_filter.lower().replace("-", "")
+        dataset = [c for c in dataset if c["id"].lower().replace("-", "") == normalized]
+        if not dataset:
+            console.print(f"[red]No case found matching '{case_filter}'[/red]")
+            sys.exit(1)
 
     console.print(f"Loaded [bold]{len(dataset)}[/bold] test cases from {dataset_path}")
 
@@ -331,6 +339,7 @@ def main() -> None:
     parser.add_argument("--out", default=DEFAULT_OUT)
     parser.add_argument("--concurrency", type=int, default=DEFAULT_CONCURRENCY)
     parser.add_argument("--timeout", type=float, default=DEFAULT_TIMEOUT)
+    parser.add_argument("--case", default=None, help="Run a single case by ID (e.g. q001 or Q-001)")
     args = parser.parse_args()
 
     asyncio.run(run_eval(
@@ -339,6 +348,7 @@ def main() -> None:
         output_dir=args.out,
         concurrency=args.concurrency,
         timeout_per_case=args.timeout,
+        case_filter=args.case,
     ))
 
 

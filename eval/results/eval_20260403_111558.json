@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-04-03T16:15:58.340516+00:00",
+  "total": 1,
+  "passed": 0,
+  "failed": 1,
+  "correctness_pct": 0.0,
+  "cases": [
+    {
+      "case_id": "Q-001",
+      "query": "Charizard",
+      "category": "name_lookup",
+      "difficulty": "easy",
+      "score": 0.4,
+      "passed": false,
+      "reasoning": "The returned cards are all correctly Charizard (no Charmeleon or Charmander), but only 8 cards were returned when the query expects 100+ results spanning all sets/eras. Major iconic Charizard cards are missing (Base Set, Hidden Fates, Brilliant Stars ex, Obsidian Flames ex, etc.), making this a significantly incomplete result for a broad browse query.",
+      "failure_category": "missing_key_variant",
+      "actual_cards_count": 8,
+      "actual_answer_snippet": "# Charizard Cards\n\nHere's a breakdown of the notable Charizard Stage 2 Fire-type cards found:\n\n---\n\n### \ud83d\udd25 Standout Cards:\n\n- **Dragon Majesty (160 HP)** \u2014 *Resolute Flame* ability boosts damage by **3",
+      "api_error": null,
+      "latency_ms": 13056
+    }
+  ],
+  "summary_by_category": {
+    "name_lookup": {
+      "total": 1,
+      "passed": 0,
+      "pct": 0.0
+    }
+  }
+}

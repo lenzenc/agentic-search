@@ -54,7 +54,7 @@ async def hybrid_search(
         "knn": {
             "field": "embedding",
             "query_vector": query_vector,
-            "num_candidates": 50,
+            "num_candidates": max(top_k * 2, 100),
             "k": top_k,
             "boost": 0.7,
         },
@@ -78,7 +78,7 @@ async def hybrid_search(
 
     response = await es.search(index=index_name, body=body)
     hits = response["hits"]["hits"]
-    return [hit["_source"] for hit in hits]
+    return [{**hit["_source"], "_score": hit["_score"]} for hit in hits]
 
 
 async def search_for_query(

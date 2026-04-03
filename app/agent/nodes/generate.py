@@ -59,7 +59,7 @@ async def generate_answer(state: AgentState) -> dict:
 
     # Fall back to all retrieved docs if grading found nothing
     cards_to_use = relevant if relevant else state.get("retrieved_docs", [])
-    cards_to_use = cards_to_use[:8]  # cap for prompt length
+    cards_for_prompt = cards_to_use[:8]  # cap for prompt length; final_cards returns all
 
     if not cards_to_use:
         answer = (
@@ -79,7 +79,7 @@ async def generate_answer(state: AgentState) -> dict:
             "trajectory": [step],
         }
 
-    cards_text = "\n\n".join(format_card_for_prompt(c) for c in cards_to_use)
+    cards_text = "\n\n".join(format_card_for_prompt(c) for c in cards_for_prompt)
     user_msg = f'User question: "{query}"\n\nRelevant Pokemon cards found:\n\n{cards_text}'
 
     client = get_client()
@@ -95,11 +95,11 @@ async def generate_answer(state: AgentState) -> dict:
     step = {
         "node": "generate_answer",
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "detail": f"Generated answer from {len(cards_to_use)} relevant cards",
+        "detail": f"Generated answer from {len(cards_for_prompt)} cards (returning {len(cards_to_use)} total)",
         "metadata": {
             "relevant_count": len(cards_to_use),
             "total_iterations": iteration_count,
-            "card_names": [c.get("name", "") for c in cards_to_use],
+            "card_names": [c.get("name", "") for c in cards_for_prompt],
         },
     }
 
