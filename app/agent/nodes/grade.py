@@ -86,9 +86,16 @@ async def grade_one(client: anthropic.AsyncAnthropic, query: str, card: dict) ->
     if start != -1 and end > start:
         raw = raw[start:end]
 
-    parsed = json.loads(raw)
-    grade = parsed.get("grade", "not_relevant")
-    reasoning = parsed.get("reasoning", "")
+    try:
+        parsed = json.loads(raw)
+        grade = parsed.get("grade", "not_relevant")
+        reasoning = parsed.get("reasoning", "")
+    except json.JSONDecodeError:
+        import re
+        grade_m = re.search(r'"grade"\s*:\s*"(relevant|not_relevant)"', raw)
+        grade = grade_m.group(1) if grade_m else "not_relevant"
+        reason_m = re.search(r'"reasoning"\s*:\s*"([^"]*)"', raw)
+        reasoning = reason_m.group(1) if reason_m else ""
 
     return GradedDocument(
         card_id=card.get("card_id", ""),

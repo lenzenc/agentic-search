@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-04-03T18:01:46.633770+00:00",
+  "total": 1,
+  "passed": 0,
+  "failed": 1,
+  "correctness_pct": 0.0,
+  "cases": [
+    {
+      "case_id": "Q-042",
+      "query": "holographic dragon card with dark background",
+      "category": "identification",
+      "difficulty": "hard",
+      "score": 0.0,
+      "passed": false,
+      "reasoning": "API call failed: API error: {'error': \"Expecting ',' delimiter: line 1 column 379 (char 378)\"}",
+      "failure_category": "api_error",
+      "actual_cards_count": 0,
+      "actual_answer_snippet": "",
+      "api_error": "API error: {'error': \"Expecting ',' delimiter: line 1 column 379 (char 378)\"}",
+      "latency_ms": 4632
+    }
+  ],
+  "summary_by_category": {
+    "identification": {
+      "total": 1,
+      "passed": 0,
+      "pct": 0.0
+    }
+  }
+}

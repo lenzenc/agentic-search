@@ -84,7 +84,19 @@ async def analyze_query(state: AgentState) -> dict:
             raw = raw[4:]
     raw = raw.strip()
 
-    parsed = json.loads(raw)
+    # Robustly extract JSON object — ignore any text before/after
+    start = raw.find('{')
+    end = raw.rfind('}') + 1
+    if start != -1 and end > start:
+        raw = raw[start:end]
+
+    try:
+        parsed = json.loads(raw)
+    except json.JSONDecodeError:
+        import re
+        is_complex_m = re.search(r'"is_complex"\s*:\s*(true|false)', raw)
+        is_complex_val = is_complex_m.group(1) == "true" if is_complex_m else False
+        parsed = {"is_complex": is_complex_val, "sub_queries": [query], "detected_set": ""}
     is_complex: bool = parsed.get("is_complex", False)
     sub_query_strings: list[str] = parsed.get("sub_queries", [query])
     detected_set: str = parsed.get("detected_set", "")

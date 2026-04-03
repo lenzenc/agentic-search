@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-04-03T18:05:21.414260+00:00",
+  "total": 1,
+  "passed": 0,
+  "failed": 1,
+  "correctness_pct": 0.0,
+  "cases": [
+    {
+      "case_id": "Q-042",
+      "query": "holographic dragon card with dark background",
+      "category": "identification",
+      "difficulty": "hard",
+      "score": 0.6,
+      "passed": false,
+      "reasoning": "The results include relevant dragon-type holos like Dark Dragonite and Rayquaza-EX which are good candidates, and Dark Charizard fits the dark background aesthetic. However, the results include non-dragon non-holo cards (Dark Dragonair Uncommon, Dark Charizard non-holo, Dark Blastoise) that dilute the relevance, and expected candidates like Garchomp variants are missing. The answer text incorrectly describes Dark Dragonite from Team Rocket Returns as Darkness-type when the actual card returned shows it without the holo designation.",
+      "failure_category": "missing_key_variant",
+      "actual_cards_count": 9,
+      "actual_answer_snippet": "# Holographic Dragon Cards with Dark Backgrounds\n\nBased on your description, here are the best matches:\n\n## Top Picks:\n\n- **Dark Dragonite (Team Rocket Returns)** \u2014 The standout option! This Stage 2 D",
+      "api_error": null,
+      "latency_ms": 12819
+    }
+  ],
+  "summary_by_category": {
+    "identification": {
+      "total": 1,
+      "passed": 0,
+      "pct": 0.0
+    }
+  }
+}
