@@ -22,7 +22,10 @@ from pathlib import Path
 
 import anthropic
 import httpx
+from dotenv import load_dotenv
 from rich.console import Console
+
+load_dotenv(override=True)
 
 from eval.run_eval import CaseResult, EvalRun, check_server_health, run_eval
 

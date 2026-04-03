@@ -19,7 +19,10 @@ from pathlib import Path
 
 import anthropic
 import httpx
+from dotenv import load_dotenv
 from rich.console import Console
+
+load_dotenv(override=True)
 from rich.table import Table
 
 from eval.judge import JudgeResult, judge_case
