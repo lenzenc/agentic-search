@@ -171,6 +171,7 @@ def card_to_document(card: dict) -> dict:
         "rarity": card.get("rarity"),
         "set_name": set_info.get("name", ""),
         "set_id": set_info.get("id", ""),
+        "set_printed_total": set_info.get("printedTotal"),
         "artist": card.get("artist"),
         "flavor_text": card.get("flavorText"),
         "attacks_text": attacks_text,

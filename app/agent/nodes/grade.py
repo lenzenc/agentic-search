@@ -69,7 +69,7 @@ async def grade_one(client: anthropic.AsyncAnthropic, query: str, card: dict) ->
 
     message = await client.messages.create(
         model="claude-haiku-4-5-20251001",  # haiku is fast + cheap for grading
-        max_tokens=128,
+        max_tokens=256,
         system=GRADE_SYSTEM,
         messages=[
             {
@@ -80,11 +80,11 @@ async def grade_one(client: anthropic.AsyncAnthropic, query: str, card: dict) ->
     )
 
     raw = message.content[0].text.strip()
-    if raw.startswith("```"):
-        raw = raw.split("```")[1]
-        if raw.startswith("json"):
-            raw = raw[4:]
-    raw = raw.strip()
+    # Extract the first JSON object, tolerating any surrounding text
+    start = raw.find("{")
+    end = raw.rfind("}") + 1
+    if start != -1 and end > start:
+        raw = raw[start:end]
 
     parsed = json.loads(raw)
     grade = parsed.get("grade", "not_relevant")

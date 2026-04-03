@@ -14,6 +14,7 @@ class CardDocument(BaseModel):
     set_name: str = ""
     set_id: str = ""
     collector_number: str = ""
+    set_printed_total: int | None = None
     artist: str | None = None
     flavor_text: str | None = None
     attacks_text: str = ""
@@ -36,6 +37,8 @@ class CardResult(BaseModel):
     stage: str | None = None
     rarity: str | None = None
     set_name: str = ""
+    collector_number: str = ""
+    set_printed_total: int | None = None
     image_small: str | None = None
     image_large: str | None = None
     attacks_text: str = ""
@@ -52,6 +55,8 @@ class CardResult(BaseModel):
             stage=src.get("stage"),
             rarity=src.get("rarity"),
             set_name=src.get("set_name", ""),
+            collector_number=src.get("collector_number", ""),
+            set_printed_total=src.get("set_printed_total"),
             image_small=src.get("image_small"),
             image_large=src.get("image_large"),
             attacks_text=src.get("attacks_text", ""),

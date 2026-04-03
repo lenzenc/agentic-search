@@ -403,6 +403,8 @@ body {
 .card-tile-info { padding: 8px; }
 .card-tile-name { font-size: 12px; font-weight: 700; margin-bottom: 2px; color: var(--text); }
 .card-tile-meta { font-size: 11px; color: var(--text-muted); }
+.card-tile-rarity { font-style: italic; }
+.card-tile-number { font-family: monospace; }
 
 /* ── Type colors — darkened for light bg readability ── */
 .type-fire      { color: #c2410c; }

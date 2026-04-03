@@ -64,6 +64,7 @@ INDEX_MAPPING = {
             "weaknesses":     {"type": "keyword"},
             "resistances":    {"type": "keyword"},
             "collector_number": {"type": "keyword"},
+            "set_printed_total": {"type": "integer"},
             "national_pokedex_numbers": {"type": "integer"},
             "embedding": {
                 "type": "dense_vector",

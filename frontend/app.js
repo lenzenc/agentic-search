@@ -261,6 +261,8 @@ function renderResult(data) {
           <div class="card-tile-name">${escHtml(card.name)}</div>
           <div class="card-tile-meta ${typeClass}">${card.types?.join("/") || card.supertype || ""}</div>
           <div class="card-tile-meta">HP ${card.hp ?? "—"} · ${card.stage || card.supertype || ""}</div>
+          ${card.rarity ? `<div class="card-tile-meta card-tile-rarity">${escHtml(card.rarity)}</div>` : ""}
+          ${card.collector_number ? `<div class="card-tile-meta card-tile-number">${escHtml(card.collector_number)}${card.set_printed_total ? `/${card.set_printed_total}` : ""}</div>` : ""}
         </div>`;
       cardsGrid.appendChild(tile);
     });
