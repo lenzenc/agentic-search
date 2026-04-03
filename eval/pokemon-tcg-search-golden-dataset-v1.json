@@ -1,0 +1,597 @@
+[
+  {
+    "id": "Q-001",
+    "query": "Charizard",
+    "intent": "Browse all Charizard cards",
+    "category": "name_lookup",
+    "difficulty": "easy",
+    "expected_results": [
+      {"pokemon": "Charizard", "note": "Should return 100+ results spanning all sets/eras, ranked by popularity/recency/price"}
+    ],
+    "expected_min_results": 100,
+    "negative_results": ["Charmeleon", "Charmander"],
+    "tags": ["high_cardinality", "ranking_test"]
+  },
+  {
+    "id": "Q-002",
+    "query": "Umbreon VMAX",
+    "intent": "Find Umbreon VMAX cards specifically",
+    "category": "name_mechanic_lookup",
+    "difficulty": "easy",
+    "expected_results": [
+      {"pokemon": "Umbreon", "name": "Umbreon VMAX", "set": "Evolving Skies", "number": "95/203", "rarity": "Rare Holo VMAX", "set_code": "SWSH07"},
+      {"pokemon": "Umbreon", "name": "Umbreon VMAX (Secret)", "set": "Evolving Skies", "number": "214/203", "rarity": "Secret Rare", "treatment": "Rainbow Rare"},
+      {"pokemon": "Umbreon", "name": "Umbreon VMAX (Alternate Art Secret)", "set": "Evolving Skies", "number": "215/203", "rarity": "Secret Rare", "treatment": "Alternate Art", "illustrator": "KEIICHIRO ITO"}
+    ],
+    "negative_results": ["Umbreon V 094/203", "Umbreon V 188/203", "Umbreon V 189/203", "Espeon VMAX"],
+    "tags": ["mechanic_filter", "variant_coverage"]
+  },
+  {
+    "id": "Q-003",
+    "query": "Charizard ex",
+    "intent": "Find modern Scarlet & Violet era Charizard ex",
+    "category": "name_mechanic_lookup",
+    "difficulty": "medium",
+    "expected_results": [
+      {"pokemon": "Charizard", "name": "Charizard ex", "set": "Obsidian Flames", "number": "125/197", "rarity": "Double Rare", "type": "Darkness", "set_code": "SV03"},
+      {"pokemon": "Charizard", "name": "Charizard ex", "set": "Obsidian Flames", "number": "215/197", "rarity": "Ultra Rare", "treatment": "Full Art"},
+      {"pokemon": "Charizard", "name": "Charizard ex", "set": "Obsidian Flames", "number": "223/197", "rarity": "Special Illustration Rare", "treatment": "Special Art", "illustrator": "AKIRA EGAWA"},
+      {"pokemon": "Charizard", "name": "Charizard ex", "set": "Obsidian Flames", "number": "228/197", "rarity": "Hyper Rare", "treatment": "Gold"},
+      {"pokemon": "Charizard", "name": "Charizard ex", "set": "Scarlet & Violet 151", "number": "006/165", "rarity": "Double Rare"},
+      {"pokemon": "Charizard", "name": "Charizard ex", "set": "Scarlet & Violet 151", "number": "199/165", "rarity": "Special Illustration Rare"}
+    ],
+    "negative_results": ["Charizard-EX Flashfire 11/106", "Charizard-EX XY Evolutions 12/108"],
+    "tags": ["case_sensitivity", "era_disambiguation", "critical_test"]
+  },
+  {
+    "id": "Q-004",
+    "query": "Charizard EX",
+    "intent": "Find XY-era Charizard EX cards",
+    "category": "name_mechanic_lookup",
+    "difficulty": "medium",
+    "expected_results": [
+      {"pokemon": "Charizard", "name": "Charizard-EX", "set": "Flashfire", "number": "11/106", "rarity": "Ultra Rare", "era": "XY"},
+      {"pokemon": "Charizard", "name": "Charizard-EX", "set": "Flashfire", "number": "100/106", "rarity": "Secret Rare", "treatment": "Full Art", "era": "XY"},
+      {"pokemon": "Charizard", "name": "Charizard-EX", "set": "XY Evolutions", "number": "12/108", "rarity": "Ultra Rare", "era": "XY"}
+    ],
+    "negative_results": ["Charizard ex Obsidian Flames 125/197", "Charizard ex 151 006/165"],
+    "tags": ["case_sensitivity", "era_disambiguation"]
+  },
+  {
+    "id": "Q-005",
+    "query": "Charizard Brilliant Stars",
+    "intent": "Find all Charizard variants in Brilliant Stars",
+    "category": "name_set_lookup",
+    "difficulty": "easy",
+    "expected_results": [
+      {"pokemon": "Charizard", "name": "Charizard V", "set": "Brilliant Stars", "number": "17/172", "set_code": "SWSH09"},
+      {"pokemon": "Charizard", "name": "Charizard VSTAR", "set": "Brilliant Stars", "number": "18/172", "set_code": "SWSH09"},
+      {"pokemon": "Charizard", "name": "Charizard V (Full Art)", "set": "Brilliant Stars", "number": "153/172", "treatment": "Full Art"},
+      {"pokemon": "Charizard", "name": "Charizard V (Alternate Full Art)", "set": "Brilliant Stars", "number": "154/172", "treatment": "Alternate Art", "illustrator": "Oswaldo KATO"},
+      {"pokemon": "Charizard", "name": "Charizard VSTAR (Rainbow)", "set": "Brilliant Stars", "number": "174/172", "treatment": "Rainbow Rare"}
+    ],
+    "negative_results": ["Charizard from any other set"],
+    "tags": ["set_filter", "variant_coverage"]
+  },
+  {
+    "id": "Q-006",
+    "query": "154/172",
+    "intent": "Identify card by printed set number",
+    "category": "number_lookup",
+    "difficulty": "medium",
+    "expected_results": [
+      {"pokemon": "Charizard", "name": "Charizard V (Alternate Full Art)", "set": "Brilliant Stars", "number": "154/172", "treatment": "Alternate Art"}
+    ],
+    "tags": ["number_only", "identification"]
+  },
+  {
+    "id": "Q-007",
+    "query": "Charizard 154/172",
+    "intent": "Find specific card by name + number",
+    "category": "name_number_lookup",
+    "difficulty": "easy",
+    "expected_results": [
+      {"pokemon": "Charizard", "name": "Charizard V (Alternate Full Art)", "set": "Brilliant Stars", "number": "154/172"}
+    ],
+    "expected_exact_results": 1,
+    "tags": ["exact_match", "unambiguous"]
+  },
+  {
+    "id": "Q-008",
+    "query": "Umbreon alt art",
+    "intent": "Find alternate art Umbreon cards",
+    "category": "treatment_search",
+    "difficulty": "medium",
+    "expected_results": [
+      {"pokemon": "Umbreon", "name": "Umbreon VMAX (Alternate Art Secret)", "set": "Evolving Skies", "number": "215/203", "treatment": "Alternate Art"},
+      {"pokemon": "Umbreon", "name": "Umbreon V (Alternate Full Art)", "set": "Evolving Skies", "number": "189/203", "treatment": "Alternate Art"}
+    ],
+    "negative_results": ["Umbreon VMAX 95/203", "Umbreon VMAX 214/203 Rainbow"],
+    "tags": ["treatment_filter", "high_stakes_price"]
+  },
+  {
+    "id": "Q-009",
+    "query": "reverse holo Pikachu Scarlet Violet",
+    "intent": "Find reverse holo version specifically",
+    "category": "treatment_search",
+    "difficulty": "medium",
+    "expected_results": [
+      {"pokemon": "Pikachu", "set": "Scarlet & Violet", "number": "056/198", "treatment": "Reverse Holo", "set_code": "SV01"}
+    ],
+    "negative_results": [
+      {"pokemon": "Pikachu", "set": "Scarlet & Violet", "number": "056/198", "treatment": "Standard"}
+    ],
+    "tags": ["treatment_filter", "same_number_different_product", "critical_test"]
+  },
+  {
+    "id": "Q-010",
+    "query": "rainbow rare Pikachu VMAX",
+    "intent": "Find rainbow secret rare Pikachu VMAX",
+    "category": "treatment_search",
+    "difficulty": "easy",
+    "expected_results": [
+      {"pokemon": "Pikachu", "name": "Pikachu VMAX (Secret)", "set": "Vivid Voltage", "number": "188/185", "treatment": "Rainbow Rare"}
+    ],
+    "negative_results": ["Pikachu VMAX 044/185"],
+    "tags": ["treatment_filter"]
+  },
+  {
+    "id": "Q-011",
+    "query": "Nest Ball",
+    "intent": "Buy Nest Ball for deck building",
+    "category": "competitive_staple",
+    "difficulty": "easy",
+    "expected_results": [
+      {"name": "Nest Ball", "card_type": "Item", "set": "Scarlet & Violet", "number": "181/198", "rarity": "Uncommon", "format": "Standard"},
+      {"name": "Nest Ball", "card_type": "Item", "set": "Scarlet & Violet", "number": "255/198", "rarity": "Secret Rare", "treatment": "Gold", "format": "Standard"},
+      {"name": "Nest Ball", "card_type": "Item", "set": "Paldean Fates", "number": "084/091", "format": "Standard"}
+    ],
+    "negative_results": ["Ultra Ball", "Great Ball", "Level Ball"],
+    "tags": ["trainer_card", "competitive"]
+  },
+  {
+    "id": "Q-012",
+    "query": "Ultra Ball",
+    "intent": "Buy Ultra Ball for deck building",
+    "category": "competitive_staple",
+    "difficulty": "easy",
+    "expected_results": [
+      {"name": "Ultra Ball", "card_type": "Item", "set": "Scarlet & Violet", "number": "196/198", "rarity": "Uncommon", "format": "Standard"}
+    ],
+    "tags": ["trainer_card", "competitive"]
+  },
+  {
+    "id": "Q-013",
+    "query": "Rare Candy",
+    "intent": "Buy Rare Candy for evolution deck",
+    "category": "competitive_staple",
+    "difficulty": "easy",
+    "expected_results": [
+      {"name": "Rare Candy", "card_type": "Item", "set": "Scarlet & Violet", "number": "191/198", "format": "Standard"},
+      {"name": "Rare Candy", "card_type": "Item", "set": "Scarlet & Violet", "number": "256/198", "treatment": "Gold", "format": "Standard"}
+    ],
+    "tags": ["trainer_card", "competitive"]
+  },
+  {
+    "id": "Q-014",
+    "query": "Boss's Orders",
+    "intent": "Find Boss's Orders supporter card",
+    "category": "competitive_staple",
+    "difficulty": "medium",
+    "expected_results": [
+      {"name": "Boss's Orders (Ghetsis)", "card_type": "Supporter", "set": "Paldea Evolved", "number": "172/193", "format": "Standard"},
+      {"name": "Boss's Orders (Giovanni)", "card_type": "Supporter", "set": "Rebel Clash", "number": "154/192", "format": "Expanded"}
+    ],
+    "tags": ["apostrophe", "subtitle_variants", "competitive"]
+  },
+  {
+    "id": "Q-015",
+    "query": "1st edition Charizard base set",
+    "intent": "Find 1st Edition Base Set Charizard",
+    "category": "vintage_edition",
+    "difficulty": "medium",
+    "expected_results": [
+      {"pokemon": "Charizard", "set": "Base Set", "number": "4/102", "rarity": "Holo Rare", "edition": "1st Edition", "illustrator": "Mitsuhiro Arita"}
+    ],
+    "negative_results": ["Charizard 4/102 Shadowless", "Charizard 4/102 Unlimited", "Charizard 4/130 Base Set 2"],
+    "tags": ["edition_filter", "high_stakes_price", "critical_test"]
+  },
+  {
+    "id": "Q-016",
+    "query": "shadowless Charizard",
+    "intent": "Find Shadowless (non-1st-Ed) Base Set Charizard",
+    "category": "vintage_edition",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Charizard", "set": "Base Set", "number": "4/102", "edition": "Shadowless", "distinguishing_features": ["No drop shadow on art box", "No 1st Edition stamp", "Copyright: 1995, 96, 98, 99"]}
+    ],
+    "negative_results": ["Charizard 4/102 1st Edition", "Charizard 4/102 Unlimited"],
+    "tags": ["edition_filter", "base_set_only_concept", "high_stakes_price"]
+  },
+  {
+    "id": "Q-017",
+    "query": "Charizard base set 2",
+    "intent": "Find Charizard from Base Set 2 reprint",
+    "category": "vintage_edition",
+    "difficulty": "medium",
+    "expected_results": [
+      {"pokemon": "Charizard", "set": "Base Set 2", "number": "4/130"}
+    ],
+    "negative_results": ["Charizard 4/102 Base Set"],
+    "tags": ["set_disambiguation", "similar_set_names"]
+  },
+  {
+    "id": "Q-018",
+    "query": "Special Delivery Charizard",
+    "intent": "Find Pokémon Center exclusive promo",
+    "category": "promo_distribution",
+    "difficulty": "medium",
+    "expected_results": [
+      {"pokemon": "Charizard", "name": "Special Delivery Charizard", "set": "SWSH Black Star Promos", "number": "SWSH075", "distribution": "Pokémon Center online exclusive"}
+    ],
+    "tags": ["promo_naming", "distribution_channel"]
+  },
+  {
+    "id": "Q-019",
+    "query": "McDonald's Pikachu holo",
+    "intent": "Find McDonald's Happy Meal promo Pikachu",
+    "category": "promo_distribution",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Pikachu", "set": "McDonald's Promos 2021", "number": "25/25", "treatment": "Holo", "distribution": "McDonald's 25th Anniversary"}
+    ],
+    "tags": ["promo_naming", "apostrophe", "distribution_channel"]
+  },
+  {
+    "id": "Q-020",
+    "query": "prerelease Garchomp ex",
+    "intent": "Find prerelease-stamped variant",
+    "category": "promo_distribution",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Garchomp", "name": "Garchomp ex (Prerelease)", "set": "Obsidian Flames", "number": "038/197", "treatment": "Prerelease Stamp"}
+    ],
+    "negative_results": ["Garchomp ex 038/197 standard (no stamp)"],
+    "tags": ["stamp_variant", "same_number_different_product"]
+  },
+  {
+    "id": "Q-021",
+    "query": "no stage Blastoise",
+    "intent": "Find Base Set Blastoise missing Stage 1 text",
+    "category": "error_misprint",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Blastoise", "set": "Base Set", "number": "2/102", "error_type": "Missing 'Stage 1' evolution text"}
+    ],
+    "tags": ["error_card", "named_error", "collector_niche"]
+  },
+  {
+    "id": "Q-022",
+    "query": "holo bleed Pokemon cards",
+    "intent": "Browse holo bleed error cards",
+    "category": "error_misprint",
+    "difficulty": "hard",
+    "expected_results": [
+      {"note": "Should return listings tagged/described as holo bleed — holographic foil extending beyond artwork area"}
+    ],
+    "tags": ["error_card", "unstructured_attribute"]
+  },
+  {
+    "id": "Q-023",
+    "query": "miscut Pokemon card",
+    "intent": "Browse miscut error cards",
+    "category": "error_misprint",
+    "difficulty": "hard",
+    "expected_results": [
+      {"note": "Should return cards described as miscut, off-center, or showing neighboring card art"}
+    ],
+    "tags": ["error_card", "unstructured_attribute"]
+  },
+  {
+    "id": "Q-024",
+    "query": "PSA 10 Charizard base set",
+    "intent": "Find PSA 10 graded Base Set Charizard",
+    "category": "graded_card",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Charizard", "set": "Base Set", "number": "4/102", "grading_company": "PSA", "grade": "10", "note": "Should show 1st Ed, Shadowless, Unlimited variants separately"}
+    ],
+    "tags": ["grading_filter", "edition_disambiguation"]
+  },
+  {
+    "id": "Q-025",
+    "query": "BGS 9.5 Umbreon VMAX alt art",
+    "intent": "Find BGS graded Umbreon VMAX alternate art",
+    "category": "graded_card",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Umbreon", "set": "Evolving Skies", "number": "215/203", "grading_company": "BGS", "grade": "9.5", "treatment": "Alternate Art"}
+    ],
+    "tags": ["grading_filter", "cross_grader"]
+  },
+  {
+    "id": "Q-026",
+    "query": "Japanese base set Charizard no rarity symbol",
+    "intent": "Find earliest Japanese print of Charizard",
+    "category": "foreign_language",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Charizard", "name": "リザードン", "set": "Japanese Base Set (first print)", "language": "Japanese", "distinguishing_feature": "No rarity symbol"}
+    ],
+    "tags": ["japanese_variant", "collector_niche"]
+  },
+  {
+    "id": "Q-027",
+    "query": "Japanese SAR Charizard",
+    "intent": "Find Japanese Special Art Rare Charizard",
+    "category": "foreign_language",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Charizard", "name": "リザードンex SAR", "language": "Japanese", "rarity": "Special Art Rare"}
+    ],
+    "negative_results": ["English Charizard ex Special Illustration Rare"],
+    "tags": ["abbreviation", "japanese_variant", "language_filter"]
+  },
+  {
+    "id": "Q-028",
+    "query": "Mitsuhiro Arita Charizard",
+    "intent": "Find Charizard cards by original artist",
+    "category": "artist_search",
+    "difficulty": "medium",
+    "expected_results": [
+      {"pokemon": "Charizard", "set": "Base Set", "number": "4/102", "illustrator": "Mitsuhiro Arita"}
+    ],
+    "negative_results": ["Charizard cards by 5ban Graphics", "Charizard cards by AKIRA EGAWA"],
+    "tags": ["artist_filter"]
+  },
+  {
+    "id": "Q-029",
+    "query": "Yuka Morii clay Pokemon cards",
+    "intent": "Find cards by clay sculpture artist",
+    "category": "artist_search",
+    "difficulty": "hard",
+    "expected_results": [
+      {"note": "Should return cards illustrated by Yuka Morii, known for 3D clay figure photography style"}
+    ],
+    "tags": ["artist_filter", "semantic_style"]
+  },
+  {
+    "id": "Q-030",
+    "query": "Zard",
+    "intent": "Find Charizard cards (collector slang)",
+    "category": "slang_alias",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Charizard", "note": "Should return same results as searching 'Charizard'"}
+    ],
+    "tags": ["synonym", "slang", "alias_mapping"]
+  },
+  {
+    "id": "Q-031",
+    "query": "Moonbreon",
+    "intent": "Find Umbreon VMAX alt art (moon artwork)",
+    "category": "slang_alias",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Umbreon", "name": "Umbreon VMAX (Alternate Art Secret)", "set": "Evolving Skies", "number": "215/203"}
+    ],
+    "tags": ["community_nickname", "alias_mapping"]
+  },
+  {
+    "id": "Q-032",
+    "query": "chonkachu",
+    "intent": "Find Pikachu VMAX cards",
+    "category": "slang_alias",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Pikachu", "name": "Pikachu VMAX", "set": "Vivid Voltage", "number": "044/185"},
+      {"pokemon": "Pikachu", "name": "Pikachu VMAX (Secret)", "set": "Vivid Voltage", "number": "188/185", "treatment": "Rainbow Rare"}
+    ],
+    "tags": ["community_nickname", "alias_mapping"]
+  },
+  {
+    "id": "Q-033",
+    "query": "Nidoran male",
+    "intent": "Find Nidoran♂ cards",
+    "category": "special_characters",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Nidoran♂", "note": "All Nidoran♂ cards across all sets"}
+    ],
+    "negative_results": ["Nidoran♀"],
+    "tags": ["unicode", "gender_symbol", "character_normalization"]
+  },
+  {
+    "id": "Q-034",
+    "query": "Farfetchd",
+    "intent": "Find Farfetch'd cards",
+    "category": "special_characters",
+    "difficulty": "medium",
+    "expected_results": [
+      {"pokemon": "Farfetch'd", "note": "All Farfetch'd and Galarian Farfetch'd cards"}
+    ],
+    "tags": ["apostrophe", "character_normalization"]
+  },
+  {
+    "id": "Q-035",
+    "query": "Mr Mime",
+    "intent": "Find Mr. Mime cards",
+    "category": "special_characters",
+    "difficulty": "medium",
+    "expected_results": [
+      {"pokemon": "Mr. Mime", "note": "All Mr. Mime cards including Galarian Mr. Mime"}
+    ],
+    "tags": ["period", "character_normalization"]
+  },
+  {
+    "id": "Q-036",
+    "query": "Type Null",
+    "intent": "Find Type: Null cards",
+    "category": "special_characters",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Type: Null", "note": "All Type: Null cards across all sets"}
+    ],
+    "tags": ["colon", "character_normalization", "null_keyword_trap"]
+  },
+  {
+    "id": "Q-037",
+    "query": "Flabebe",
+    "intent": "Find Flabébé cards",
+    "category": "special_characters",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Flabébé", "note": "All Flabébé cards across all sets"}
+    ],
+    "tags": ["diacritical", "accent_normalization"]
+  },
+  {
+    "id": "Q-038",
+    "query": "Ho Oh",
+    "intent": "Find Ho-Oh cards",
+    "category": "special_characters",
+    "difficulty": "medium",
+    "expected_results": [
+      {"pokemon": "Ho-Oh", "note": "All Ho-Oh cards including V, EX, GX variants"}
+    ],
+    "tags": ["hyphen", "character_normalization"]
+  },
+  {
+    "id": "Q-039",
+    "query": "1st edition holo Charizard base set PSA 10",
+    "intent": "Find the holy grail card",
+    "category": "composite_query",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Charizard", "set": "Base Set", "number": "4/102", "edition": "1st Edition", "treatment": "Holo", "grading_company": "PSA", "grade": "10"}
+    ],
+    "signal_count": 6,
+    "tags": ["composite", "six_signal_parse", "holy_grail"]
+  },
+  {
+    "id": "Q-040",
+    "query": "Japanese special art rare Umbreon VMAX alternate art",
+    "intent": "Find Japanese SAR Moonbreon",
+    "category": "composite_query",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Umbreon", "set": "Eevee Heroes (Japanese)", "language": "Japanese", "rarity": "Special Art Rare", "treatment": "Alternate Art"}
+    ],
+    "signal_count": 5,
+    "tags": ["composite", "redundant_signals", "japanese"]
+  },
+  {
+    "id": "Q-041",
+    "query": "reverse holo Nest Ball Scarlet Violet near mint",
+    "intent": "Buy specific treatment + condition",
+    "category": "composite_query",
+    "difficulty": "medium",
+    "expected_results": [
+      {"name": "Nest Ball", "set": "Scarlet & Violet", "number": "181/198", "treatment": "Reverse Holo", "condition": "Near Mint"}
+    ],
+    "negative_results": ["Nest Ball 181/198 standard", "Nest Ball 255/198 gold"],
+    "tags": ["composite", "treatment_condition_filter"]
+  },
+  {
+    "id": "Q-042",
+    "query": "holographic dragon card with dark background",
+    "intent": "User trying to identify a card from description",
+    "category": "identification",
+    "difficulty": "hard",
+    "expected_results": [
+      {"note": "Should surface dragon-type holo Pokémon: Charizard, Rayquaza, Dragonite, Garchomp variants as candidates"}
+    ],
+    "tags": ["semantic_search", "visual_description", "identification"]
+  },
+  {
+    "id": "Q-043",
+    "query": "old Pikachu card red cheeks",
+    "intent": "Identify Base Set Pikachu red cheeks variant",
+    "category": "identification",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Pikachu", "set": "Base Set", "number": "58/102", "variant": "Red Cheeks"}
+    ],
+    "tags": ["physical_attribute", "visual_description", "identification"]
+  },
+  {
+    "id": "Q-044",
+    "query": "023/078",
+    "intent": "Identify set from card number",
+    "category": "identification",
+    "difficulty": "medium",
+    "expected_results": [
+      {"note": "Should return all cards numbered 023/078 across sets with set names prominently displayed"}
+    ],
+    "tags": ["number_only", "multi_set_disambiguation"]
+  },
+  {
+    "id": "Q-045",
+    "query": "Evolving Skies booster box",
+    "intent": "Buy sealed booster box",
+    "category": "sealed_product",
+    "difficulty": "easy",
+    "expected_results": [
+      {"product_type": "Sealed", "name": "Evolving Skies Booster Box", "set": "Evolving Skies", "contents": "36 booster packs"}
+    ],
+    "negative_results": ["Individual Evolving Skies singles", "Evolving Skies ETB"],
+    "tags": ["sealed_vs_singles", "product_type_filter"]
+  },
+  {
+    "id": "Q-046",
+    "query": "ETB 151",
+    "intent": "Buy 151 Elite Trainer Box",
+    "category": "sealed_product",
+    "difficulty": "medium",
+    "expected_results": [
+      {"product_type": "Sealed", "name": "Scarlet & Violet 151 Elite Trainer Box", "set": "Scarlet & Violet 151"}
+    ],
+    "tags": ["abbreviation", "sealed_product"]
+  },
+  {
+    "id": "Q-047",
+    "query": "Charziard",
+    "intent": "Find Charizard (misspelled)",
+    "category": "error_tolerance",
+    "difficulty": "medium",
+    "expected_results": [
+      {"pokemon": "Charizard", "note": "Should fuzzy match to Charizard with did-you-mean suggestion"}
+    ],
+    "tags": ["typo", "fuzzy_match", "did_you_mean"]
+  },
+  {
+    "id": "Q-048",
+    "query": "Pikachu VMAX Obsidian Flames",
+    "intent": "Card does not exist in this set",
+    "category": "negative_test",
+    "difficulty": "medium",
+    "expected_results": [
+      {"note": "Zero exact matches. Should suggest Pikachu VMAX from Vivid Voltage or Obsidian Flames cards."}
+    ],
+    "expected_exact_results": 0,
+    "tags": ["negative_test", "graceful_empty", "suggestion"]
+  },
+  {
+    "id": "Q-049",
+    "query": "Mewtwo ex",
+    "intent": "Ambiguous era — could be modern or classic",
+    "category": "disambiguation",
+    "difficulty": "hard",
+    "expected_results": [
+      {"pokemon": "Mewtwo", "note": "Should return BOTH modern SV-era (lowercase ex) and classic era cards, with modern ranked higher by recency"}
+    ],
+    "tags": ["era_ambiguity", "dual_era", "ranking"]
+  },
+  {
+    "id": "Q-050",
+    "query": "God Pack",
+    "intent": "Concept — not a card or product",
+    "category": "conceptual_negative",
+    "difficulty": "hard",
+    "expected_results": [
+      {"note": "Should NOT return random cards. Ideal: educational content or 'no results' with helpful context."}
+    ],
+    "expected_exact_results": 0,
+    "tags": ["conceptual_term", "jargon", "graceful_empty"]
+  }
+]

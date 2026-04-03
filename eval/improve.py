@@ -290,7 +290,7 @@ def save_report(
 
 
 async def improve(
-    dataset_path: str = "data/pokemon-tcg-search-golden-dataset.json",
+    dataset_path: str = "eval/pokemon-tcg-search-golden-dataset.json",
     api_base: str = "http://localhost:8000",
     output_dir: str = "eval/results",
     target_pct: float = TARGET_PCT,
@@ -429,7 +429,7 @@ async def improve(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Iteratively improve search prompts using golden dataset")
-    parser.add_argument("--dataset", default="data/pokemon-tcg-search-golden-dataset.json")
+    parser.add_argument("--dataset", default="eval/pokemon-tcg-search-golden-dataset.json")
     parser.add_argument("--api", default="http://localhost:8000")
     parser.add_argument("--out", default="eval/results")
     parser.add_argument("--target", type=float, default=TARGET_PCT, help="Target correctness %")

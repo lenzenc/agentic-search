@@ -29,7 +29,7 @@ from eval.judge import JudgeResult, judge_case
 
 console = Console()
 
-DEFAULT_DATASET = "data/pokemon-tcg-search-golden-dataset.json"
+DEFAULT_DATASET = "eval/pokemon-tcg-search-golden-dataset.json"
 DEFAULT_API = "http://localhost:8000"
 DEFAULT_OUT = "eval/results"
 DEFAULT_CONCURRENCY = 3
