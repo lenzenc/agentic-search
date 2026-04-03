@@ -25,6 +25,16 @@ GRADE_SYSTEM = """You are grading whether a Pokemon card is relevant to a user's
 
 Be strict but fair. Grade "relevant" only if the card meaningfully matches what the user is looking for.
 
+Pay close attention to these specific criteria:
+
+- **Set matching**: If the query specifies a set (e.g., "Brilliant Stars"), the card MUST be from that exact set to be relevant. Cards from other sets are not relevant even if the Pokemon name matches.
+- **Card number matching**: If the query includes a card number (e.g., "154/172"), the card MUST have that exact collector number. A different card with a similar number or from the same set is not relevant.
+- **Artist matching**: If the query specifies an artist (e.g., "Mitsuhiro Arita"), the card MUST be illustrated by that artist. Prioritize the most iconic/well-known card matching the artist+Pokemon combination (e.g., Mitsuhiro Arita + Charizard = Base Set Charizard 4/102).
+- **Nickname/slang matching**: If the query uses a popular nickname (e.g., "Moonbreon" = Umbreon VMAX from Evolving Skies), the card MUST be the specific card that nickname refers to, not just any card featuring that Pokemon.
+- **Name matching**: The card's Pokemon or card name must match what the user is searching for. Do not accept cards of different Pokemon or trainers as substitutes.
+
+If any required attribute (set, number, artist, nickname target) does not match, grade as "not_relevant".
+
 Respond ONLY with valid JSON:
 {"grade": "relevant" | "not_relevant", "reasoning": "one concise sentence explaining your decision"}"""
 
