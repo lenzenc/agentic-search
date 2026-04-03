@@ -59,8 +59,10 @@ If complex: return is_complex=true and 2-4 targeted sub_queries.
 
 Sub-queries should be specific search strings optimized for a Pokemon card search engine. For nickname/slang queries, always expand to the real card name and set in the sub_query.
 
+Also extract detected_set: if the query specifies a set name (e.g. "Brilliant Stars", "Evolving Skies", "Base Set"), output the exact set name as it appears in the Pokemon TCG. If no set is specified, output "".
+
 Respond ONLY with valid JSON matching this schema:
-{"is_complex": boolean, "sub_queries": ["query1", "query2", ...]}"""
+{"is_complex": boolean, "sub_queries": ["query1", "query2", ...], "detected_set": "set name or empty string"}"""
 
 
 async def analyze_query(state: AgentState) -> dict:
@@ -85,6 +87,7 @@ async def analyze_query(state: AgentState) -> dict:
     parsed = json.loads(raw)
     is_complex: bool = parsed.get("is_complex", False)
     sub_query_strings: list[str] = parsed.get("sub_queries", [query])
+    detected_set: str = parsed.get("detected_set", "")
 
     # Always have at least the original query
     if not sub_query_strings:
@@ -98,6 +101,8 @@ async def analyze_query(state: AgentState) -> dict:
         detail = f"Complex query — expanding into {len(sub_queries)} sub-queries: {sub_query_strings}"
     else:
         detail = f"Simple query — proceeding directly to retrieval"
+    if detected_set:
+        detail += f" | Set filter: {detected_set}"
 
     step: TrajectoryStep = {
         "node": "analyze_query",
@@ -107,6 +112,7 @@ async def analyze_query(state: AgentState) -> dict:
             "original_query": query,
             "is_complex": is_complex,
             "sub_queries": sub_query_strings,
+            "detected_set": detected_set,
         },
     }
 
@@ -114,5 +120,6 @@ async def analyze_query(state: AgentState) -> dict:
         "is_complex": is_complex,
         "sub_queries": sub_queries,
         "active_query": sub_query_strings[0],
+        "detected_set": detected_set,
         "trajectory": [step],
     }

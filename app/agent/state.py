@@ -29,6 +29,7 @@ class AgentState(TypedDict):
     is_complex: bool
     sub_queries: list[SubQuery]
     active_query: str
+    detected_set: str  # set name extracted by analyze, "" if none
 
     # Retrieval
     retrieved_docs: list[dict]

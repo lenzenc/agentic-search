@@ -42,36 +42,51 @@ async def hybrid_search(
     query_vector: list[float],
     index_name: str,
     top_k: int = 10,
+    set_filter: str = "",
 ) -> list[dict]:
     """
     Hybrid kNN + BM25 search using ES 8.x combined knn+query request.
     ES merges the two result sets by summing normalised scores.
     Returns a list of _source dicts (embedding excluded).
+    If set_filter is provided, restricts both kNN and BM25 results to that set_name.
     """
     es = get_es_client()
 
+    filter_clause = [{"term": {"set_name": set_filter}}] if set_filter else []
+
+    knn_block: dict = {
+        "field": "embedding",
+        "query_vector": query_vector,
+        "num_candidates": max(top_k * 2, 100),
+        "k": top_k,
+        "boost": 0.7,
+    }
+    if filter_clause:
+        knn_block["filter"] = filter_clause
+
+    multi_match = {
+        "multi_match": {
+            "query": query_text,
+            "fields": [
+                "name^3",
+                "attacks_text^2",
+                "abilities_text^2",
+                "collector_number^3",
+                "full_text",
+            ],
+            "type": "best_fields",
+            "boost": 0.3,
+        }
+    }
+
+    if filter_clause:
+        query_block: dict = {"bool": {"must": multi_match, "filter": filter_clause}}
+    else:
+        query_block = multi_match
+
     body = {
-        "knn": {
-            "field": "embedding",
-            "query_vector": query_vector,
-            "num_candidates": max(top_k * 2, 100),
-            "k": top_k,
-            "boost": 0.7,
-        },
-        "query": {
-            "multi_match": {
-                "query": query_text,
-                "fields": [
-                    "name^3",
-                    "attacks_text^2",
-                    "abilities_text^2",
-                    "collector_number^3",
-                    "full_text",
-                ],
-                "type": "best_fields",
-                "boost": 0.3,
-            }
-        },
+        "knn": knn_block,
+        "query": query_block,
         "size": top_k,
         "_source": {"excludes": ["embedding"]},
     }
@@ -85,7 +100,8 @@ async def search_for_query(
     query: str,
     index_name: str,
     top_k: int = 10,
+    set_filter: str = "",
 ) -> list[dict]:
     """Convenience wrapper: embed query then run hybrid search."""
     vector = await embed_query(query)
-    return await hybrid_search(query, vector, index_name, top_k)
+    return await hybrid_search(query, vector, index_name, top_k, set_filter)
