@@ -56,6 +56,17 @@ async def grade_one(client: anthropic.AsyncAnthropic, query: str, card: dict) ->
     if abilities:
         card_desc += f"\nAbilities: {abilities}"
 
+    set_name = card.get("set_name", "")
+    rarity = card.get("rarity", "")
+    collector_number = card.get("collector_number", "")
+
+    if set_name:
+        card_desc += f"\nSet: {set_name}"
+    if rarity:
+        card_desc += f" | Rarity: {rarity}"
+    if collector_number:
+        card_desc += f" | Number: {collector_number}"
+
     message = await client.messages.create(
         model="claude-haiku-4-5-20251001",  # haiku is fast + cheap for grading
         max_tokens=128,
