@@ -18,6 +18,8 @@ async def retrieve(state: AgentState) -> dict:
     sub_queries: list[SubQuery] = state.get("sub_queries", [])
 
     set_filter: str = state.get("detected_set", "")
+    collector_number_filter: str = state.get("detected_collector_number", "")
+    set_total_filter: int | None = state.get("detected_set_total", None)
     seen_ids: set[str] = set()
     merged_docs: list[dict] = []
 
@@ -25,7 +27,10 @@ async def retrieve(state: AgentState) -> dict:
         # Fan-out: retrieve for each sub-query, merge unique results
         updated_sub_queries: list[SubQuery] = []
         for sq in sub_queries:
-            results = await search_for_query(sq["query"], INDEX_NAME, TOP_K, set_filter)
+            results = await search_for_query(
+                sq["query"], INDEX_NAME, TOP_K, set_filter,
+                collector_number_filter, set_total_filter
+            )
             retrieved_ids = []
             for doc in results:
                 card_id = doc.get("card_id", "")
@@ -40,7 +45,10 @@ async def retrieve(state: AgentState) -> dict:
     else:
         # Simple or rewrite loop: use active_query
         active_query = state.get("active_query", state.get("original_query", ""))
-        results = await search_for_query(active_query, INDEX_NAME, TOP_K, set_filter)
+        results = await search_for_query(
+            active_query, INDEX_NAME, TOP_K, set_filter,
+            collector_number_filter, set_total_filter
+        )
         for doc in results:
             card_id = doc.get("card_id", "")
             if card_id not in seen_ids:

@@ -43,16 +43,25 @@ async def hybrid_search(
     index_name: str,
     top_k: int = 10,
     set_filter: str = "",
+    collector_number_filter: str = "",
+    set_total_filter: int | None = None,
 ) -> list[dict]:
     """
     Hybrid kNN + BM25 search using ES 8.x combined knn+query request.
     ES merges the two result sets by summing normalised scores.
     Returns a list of _source dicts (embedding excluded).
     If set_filter is provided, restricts both kNN and BM25 results to that set_name.
+    If collector_number_filter and/or set_total_filter are provided, restricts to exact card number.
     """
     es = get_es_client()
 
-    filter_clause = [{"term": {"set_name": set_filter}}] if set_filter else []
+    filter_clause = []
+    if set_filter:
+        filter_clause.append({"term": {"set_name": set_filter}})
+    if collector_number_filter:
+        filter_clause.append({"term": {"collector_number": collector_number_filter}})
+    if set_total_filter is not None:
+        filter_clause.append({"term": {"set_printed_total": set_total_filter}})
 
     knn_block: dict = {
         "field": "embedding",
@@ -101,7 +110,12 @@ async def search_for_query(
     index_name: str,
     top_k: int = 10,
     set_filter: str = "",
+    collector_number_filter: str = "",
+    set_total_filter: int | None = None,
 ) -> list[dict]:
     """Convenience wrapper: embed query then run hybrid search."""
     vector = await embed_query(query)
-    return await hybrid_search(query, vector, index_name, top_k, set_filter)
+    return await hybrid_search(
+        query, vector, index_name, top_k,
+        set_filter, collector_number_filter, set_total_filter
+    )

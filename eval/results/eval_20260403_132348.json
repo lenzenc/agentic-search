@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-04-03T18:23:48.831363+00:00",
+  "total": 1,
+  "passed": 1,
+  "failed": 0,
+  "correctness_pct": 100.0,
+  "cases": [
+    {
+      "case_id": "Q-006",
+      "query": "154/172",
+      "category": "number_lookup",
+      "difficulty": "medium",
+      "score": 0.8,
+      "passed": true,
+      "reasoning": "The correct card (Charizard V from Brilliant Stars, 154/172) was identified and returned. However, the expected result specifies 'Alternate Full Art' as the variant, and the returned card is listed as 'Rare Ultra' rather than the Alternate Full Art version \u2014 these are distinct cards with the same set number, suggesting a minor variant mismatch.",
+      "failure_category": null,
+      "actual_cards_count": 1,
+      "actual_answer_snippet": "## Charizard V \u2014 154/172 (Brilliant Stars)\n\nThis is **Charizard V** from the **Sword & Shield: Brilliant Stars** set, card number **154/172**.\n\nHere are the key details:\n\n- **Type:** Fire | **HP:** 22",
+      "api_error": null,
+      "latency_ms": 14913
+    }
+  ],
+  "summary_by_category": {
+    "number_lookup": {
+      "total": 1,
+      "passed": 1,
+      "pct": 100.0
+    }
+  }
+}

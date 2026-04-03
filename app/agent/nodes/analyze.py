@@ -3,9 +3,19 @@ analyze_query node — classifies query complexity and decomposes into sub-queri
 """
 import json
 import os
+import re
 from datetime import datetime, timezone
 
 import anthropic
+
+_NUMBER_PATTERN = re.compile(r'\b(\d+)/(\d+)\b')
+
+
+def _extract_card_number(query: str) -> tuple[str, int | None]:
+    m = _NUMBER_PATTERN.search(query)
+    if m:
+        return m.group(1), int(m.group(2))
+    return "", None
 
 from app.agent.state import AgentState, SubQuery, TrajectoryStep
 
@@ -67,6 +77,7 @@ Respond ONLY with valid JSON matching this schema:
 
 async def analyze_query(state: AgentState) -> dict:
     query = state["original_query"]
+    detected_collector_number, detected_set_total = _extract_card_number(query)
     client = get_client()
 
     message = await client.messages.create(
@@ -115,6 +126,8 @@ async def analyze_query(state: AgentState) -> dict:
         detail = f"Simple query — proceeding directly to retrieval"
     if detected_set:
         detail += f" | Set filter: {detected_set}"
+    if detected_collector_number:
+        detail += f" | Number filter: {detected_collector_number}/{detected_set_total}"
 
     step: TrajectoryStep = {
         "node": "analyze_query",
@@ -125,6 +138,8 @@ async def analyze_query(state: AgentState) -> dict:
             "is_complex": is_complex,
             "sub_queries": sub_query_strings,
             "detected_set": detected_set,
+            "detected_collector_number": detected_collector_number,
+            "detected_set_total": detected_set_total,
         },
     }
 
@@ -133,5 +148,7 @@ async def analyze_query(state: AgentState) -> dict:
         "sub_queries": sub_queries,
         "active_query": sub_query_strings[0],
         "detected_set": detected_set,
+        "detected_collector_number": detected_collector_number,
+        "detected_set_total": detected_set_total,
         "trajectory": [step],
     }

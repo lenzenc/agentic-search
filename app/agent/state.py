@@ -30,6 +30,8 @@ class AgentState(TypedDict):
     sub_queries: list[SubQuery]
     active_query: str
     detected_set: str  # set name extracted by analyze, "" if none
+    detected_collector_number: str  # e.g. "154", "" if none
+    detected_set_total: int | None  # e.g. 172, None if none
 
     # Retrieval
     retrieved_docs: list[dict]
