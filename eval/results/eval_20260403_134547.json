@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-04-03T18:45:47.360420+00:00",
+  "total": 1,
+  "passed": 1,
+  "failed": 0,
+  "correctness_pct": 100.0,
+  "cases": [
+    {
+      "case_id": "Q-044",
+      "query": "023/078",
+      "category": "identification",
+      "difficulty": "medium",
+      "score": 0.8,
+      "passed": true,
+      "reasoning": "The result correctly identifies the card numbered 023/078 as Lapras from the Pok\u00e9mon GO set, which directly addresses the user's intent to identify the set from the card number. The answer prominently displays the set name as required. Minor deduction because the query could theoretically match 023/078 across multiple sets, but only one result was returned \u2014 however, the single result found is accurate and well-described.",
+      "failure_category": null,
+      "actual_cards_count": 1,
+      "actual_answer_snippet": "## Lapras \u2014 Pok\u00e9mon GO Set (023/078)\n\nThis is the **Basic Water-type Lapras** from the **Pok\u00e9mon GO** set with **120 HP**.\n\n**Attacks:**\n- **Ice Beam** (20 damage): Flip a coin \u2014 if heads, your oppone",
+      "api_error": null,
+      "latency_ms": 13913
+    }
+  ],
+  "summary_by_category": {
+    "identification": {
+      "total": 1,
+      "passed": 1,
+      "pct": 100.0
+    }
+  }
+}

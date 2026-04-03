@@ -14,7 +14,7 @@ _NUMBER_PATTERN = re.compile(r'\b(\d+)/(\d+)\b')
 def _extract_card_number(query: str) -> tuple[str, int | None]:
     m = _NUMBER_PATTERN.search(query)
     if m:
-        return m.group(1), int(m.group(2))
+        return str(int(m.group(1))), int(m.group(2))
     return "", None
 
 from app.agent.state import AgentState, SubQuery, TrajectoryStep
