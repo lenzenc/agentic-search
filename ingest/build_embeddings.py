@@ -48,13 +48,17 @@ def build_text_blob(card: dict) -> str:
             stage = sub
             break
 
+    number = card.get("number", "")
+    printed_total = set_info.get("printedTotal", "")
+    number_str = f" Card number: {number}/{printed_total}." if number and printed_total else (f" Card number: {number}." if number else "")
+
     type_str = "/".join(types) if types else supertype
     stage_str = f"{stage} " if stage else ""
     hp_str = f" HP: {hp}." if hp else ""
     rarity_str = f" Rarity: {rarity}." if rarity else ""
     set_str = f" Set: {set_name}." if set_name else ""
 
-    parts.append(f"{name} is a {stage_str}{type_str} Pokemon card.{hp_str}{rarity_str}{set_str}")
+    parts.append(f"{name} is a {stage_str}{type_str} Pokemon card.{hp_str}{rarity_str}{set_str}{number_str}")
 
     # Attacks
     attacks = card.get("attacks", [])
@@ -157,6 +161,7 @@ def card_to_document(card: dict) -> dict:
 
     return {
         "card_id": card.get("id", ""),
+        "collector_number": card.get("number", ""),
         "name": card.get("name", ""),
         "supertype": card.get("supertype", ""),
         "subtypes": subtypes,

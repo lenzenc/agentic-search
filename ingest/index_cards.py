@@ -63,6 +63,7 @@ INDEX_MAPPING = {
             "image_large":    {"type": "keyword", "index": False},
             "weaknesses":     {"type": "keyword"},
             "resistances":    {"type": "keyword"},
+            "collector_number": {"type": "keyword"},
             "national_pokedex_numbers": {"type": "integer"},
             "embedding": {
                 "type": "dense_vector",

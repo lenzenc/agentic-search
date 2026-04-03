@@ -65,6 +65,7 @@ async def hybrid_search(
                     "name^3",
                     "attacks_text^2",
                     "abilities_text^2",
+                    "collector_number^3",
                     "full_text",
                 ],
                 "type": "best_fields",

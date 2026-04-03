@@ -13,6 +13,7 @@ class CardDocument(BaseModel):
     rarity: str | None = None
     set_name: str = ""
     set_id: str = ""
+    collector_number: str = ""
     artist: str | None = None
     flavor_text: str | None = None
     attacks_text: str = ""
